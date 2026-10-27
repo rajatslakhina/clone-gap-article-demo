@@ -2,7 +2,7 @@
 
 **How much of your app can an AI agent rebuild from what you've posted? This package measures it.**
 
-Article: (added after publish)
+Article: [I Asked an AI Agent to Clone an App From Its Public Posts. Only 2 of 12 Rules Survived.](https://medium.com/@er.rajatlakhina/i-asked-an-ai-agent-to-clone-an-app-from-its-public-posts-only-2-of-12-rules-survived-6c7ce4dcaf4b)
 
 When an agent can clone an app in a weekend, the UI and the feature list stop being a moat. In [Fatbobman's Swift Weekly #157](https://weekly.fatbobman.com/p/fatbobmans-swift-weekly-157), Fatbobman worries that Build in Public will turn back into Build in Private now that AI can rebuild an app from the screenshots its developer shares. This repo is a red-team exercise to find out what a copy actually gets.
 
