@@ -1,16 +1,13 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
-*{margin:0;box-sizing:border-box}body{width:1040px;height:720px;background:#e2e8f0;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#0f172a;padding:30px 40px}
+*{margin:0;box-sizing:border-box}body{width:1040px;height:1000px;background:#e2e8f0;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#0f172a;padding:30px 90px}
 h2{font-size:32px;font-weight:800}p{font-size:21px;color:#475569;margin-top:6px}
-.row{display:flex;gap:40px;justify-content:center;margin-top:24px}
-figure{text-align:center}
-.phone{width:460px;height:500px;overflow:hidden;border-radius:44px 44px 0 0;border:9px solid #0f172a;border-bottom:none;background:#fff;position:relative}
-.phone img{width:100%;display:block}
-.phone:after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(rgba(226,232,240,0),#e2e8f0)}
+figure{margin-top:22px}
+.crop{width:860px;overflow:hidden;border-radius:22px;box-shadow:0 12px 32px #0f172a30;background:#f2f2f7}
+.crop img{width:934.4px;margin-left:-37.2px;margin-top:-534.6px;display:block}
 figcaption{font-size:22px;font-weight:700;margin-top:10px}
 </style></head><body>
-<h2>The CloneGap demo, running on the iOS Simulator</h2>
-<p>Captured by CI on a GitHub-hosted macOS runner: build, install, launch, screenshot.</p>
-<div class="row">
-<figure><div class="phone"><img src="../../Demo/Screenshots/gap.png"></div><figcaption>4/4 screenshots, 10/13 hidden cases</figcaption></figure>
-<figure><div class="phone"><img src="../../Demo/Screenshots/rules.png"></div><figcaption>2 survived, 7 worked out, 3 leaked</figcaption></figure>
-</div></body></html>
+<h2>The CloneGap demo on the iOS Simulator</h2>
+<p>Crops from the screenshots CI captured on a GitHub-hosted macOS runner.</p>
+<figure><div class="crop" style="height:290.5px"><img src="../../Demo/Screenshots/gap.png"></div><figcaption>Clone gap screen: 4/4 screenshots and 10/13 hidden cases matched</figcaption></figure>
+<figure><div class="crop" style="height:433.9px"><img src="../../Demo/Screenshots/rules.png"></div><figcaption>Rules screen: the two rules that survived the clone</figcaption></figure>
+</body></html>
