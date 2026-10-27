@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{margin:0;box-sizing:border-box}body{width:1200px;height:628px;background:#0f172a;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#e2e8f0;padding:36px 52px}
+.k{font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;font-weight:600}
+pre{margin-top:16px;background:#020617;border:1px solid #1e293b;border-radius:16px;padding:22px 28px;font-family:Menlo,"DejaVu Sans Mono",monospace;font-size:17px;line-height:1.45;color:#e2e8f0;white-space:pre}
+.c{color:#64748b}.kw{color:#f472b6}.t{color:#7dd3fc}
+.f{margin-top:14px;font-size:17px;color:#64748b}
+</style></head><body>
+<div class="k">CloneGap.swift · flip one decision, see who notices</div>
+<pre><span class="kw">for</span> rule <span class="kw">in</span> <span class="t">Rule</span>.allCases {
+    <span class="kw">let</span> mutant = <span class="t">TabSplitter</span>(rules: rule.mutant)
+    matrix[rule] = cases.filter { !$0.isMatched(by: mutant) }.map(\.id)
+}
+<span class="c">// …then, for each rule, split its cases into published and hidden:</span>
+<span class="kw">if</span> !pub.isEmpty {
+    status = .leaked          <span class="c">// a screenshot already shows it</span>
+} <span class="kw">else if</span> hid.isEmpty {
+    status = .untested        <span class="c">// an eval gap, not a moat</span>
+} <span class="kw">else if</span> hid.contains(where: { failed.contains($0) }) {
+    status = .moat            <span class="c">// the clone got one wrong</span>
+} <span class="kw">else</span> {
+    status = .reconstructed
+}</pre>
+<div class="f">github.com/rajatslakhina/clone-gap-article-demo · 20 tests</div>
+</body></html>
