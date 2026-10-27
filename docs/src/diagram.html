@@ -1,49 +1,51 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
-*{margin:0;box-sizing:border-box}body{width:1600px;height:940px;background:#f8fafc;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#0f172a;padding:40px 60px}
-h2{font-size:34px;font-weight:800}p.s{font-size:20px;color:#475569;margin-top:8px;line-height:1.4}
-table{border-collapse:separate;border-spacing:0;margin-top:22px;width:100%}
-th{text-align:left;font-size:19px;font-weight:600;padding:8px 14px 8px 0;width:520px;white-space:nowrap}
-td{width:46px;height:46px;text-align:center;border-bottom:1px solid #e2e8f0}
-td.h{font-size:15px;font-weight:700;color:#475569;height:34px;font-family:Menlo,monospace}
+*{margin:0;box-sizing:border-box}body{width:1040px;height:960px;background:#f8fafc;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#0f172a;padding:34px 30px}
+h2{font-size:36px;font-weight:800}p.s{font-size:22px;color:#475569;margin-top:8px;line-height:1.35}
+table{border-collapse:separate;border-spacing:0;margin-top:20px}
+th{text-align:left;font-size:23px;font-weight:600;padding:0 12px 0 0;width:372px;white-space:nowrap;height:42px;border-bottom:1px solid #e2e8f0}
+td{width:34px;height:42px;text-align:center;border-bottom:1px solid #e2e8f0;padding:0}
+td.h{font-size:17px;font-weight:700;color:#475569;height:36px;font-family:Menlo,"DejaVu Sans Mono",monospace;letter-spacing:-.04em}
 td.pub{background:#fef2f2}td.h.pub{color:#b91c1c}
-td.miss{background:#ecfdf5}td.h.miss{color:#047857}
-.dot{display:inline-block;width:18px;height:18px;border-radius:50%}
+td.miss{background:#dcfce7}td.h.miss{color:#047857}
+tr.g th{font-size:18px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding-top:14px;height:48px;border-bottom:2px solid #cbd5e1}
+tr.g.leak th{color:#b91c1c}tr.g.rec th{color:#b45309}tr.g.moat th{color:#15803d}
+tr.g td{border-bottom:2px solid #cbd5e1}
+.dot{display:inline-block;width:20px;height:20px;border-radius:50%;vertical-align:middle}
 .dot.leak{background:#ef4444}.dot.rec{background:#f59e0b}.dot.moat{background:#16a34a}
-td.st{width:170px;text-align:right;border-bottom:1px solid #e2e8f0}
-.chip{font-size:16px;font-weight:700;padding:6px 12px;border-radius:999px}
-.chip.leak{background:#fee2e2;color:#b91c1c}.chip.rec{background:#fef3c7;color:#92400e}.chip.moat{background:#dcfce7;color:#166534}
-.legend{margin-top:18px;font-size:17px;color:#475569}.legend b{color:#0f172a}
+.legend{margin-top:18px;font-size:20px;color:#475569;line-height:1.4}.legend b{color:#0f172a}
 </style></head><body>
 <h2>Flip one rule. Which cases notice?</h2>
-<p class="s">Each row is Tab with one decision changed to the most likely alternative. A dot means that case’s numbers change. Red columns are the four published screenshots; green columns are the hidden cases the agent’s clone got wrong.</p>
+<p class="s">Each row is Tab with one rule changed to its most likely alternative. A dot means that case's numbers change. Red columns: the four screenshots. Green columns: the cases the agent's clone got wrong.</p>
 <table id="m"></table>
-<div class="legend"><b>Leaked:</b> a published screenshot already tells the rule apart. <b>Worked out:</b> only hidden cases do, and the clone matched them all. <b>Still mine:</b> the clone missed a hidden case for it.</div>
+<div class="legend"><b>Leaked:</b> a screenshot already reveals it. <b>Worked out:</b> only hidden cases test it, and the clone matched them all. <b>Survived:</b> the clone missed a hidden case for it.</div>
 <script>
 // Kill matrix and clone failures as computed by CloneGap (asserted in CloneGapTests).
 const cols = ["S1","S2","S3","S4","H1","H2","H3","H4","H5","H6","H7","H8","H9","H10","H11","H12","H13"];
 const failed = ["H4","H8","H13"];
-const rows = [
-  ["Tip is calculated before tax", ["S1","S4","H4","H11","H13"]],
-  ["One person absorbs every leftover cent", ["S4","H1","H10","H11"]],
-  ["Tax and tip are rounded once, for the bill", ["S2","S3","S4","H1","H2","H3","H10","H11"]],
-  ["That person is the payer", ["H1"]],
-  ["Decimal places follow the currency", ["H2","H3"]],
-  ["Coupons come off in proportion to the order", ["H5"]],
-  ["A coupon named for someone only reduces their share", ["H6"]],
-  ["No tip on the service charge", ["H7"]],
-  ["No tax on the service charge", ["H9"]],
-  ["People who ordered nothing pay no service charge", ["H12"]],
-  ["Tip is calculated before coupons", ["H4","H13"]],
-  ["Service charge is split evenly", ["H8"]]
+const groups = [
+  ["Leaked through the screenshots", "leak", [
+    ["Tip before tax", ["S1","S4","H4","H11","H13"]],
+    ["One person absorbs leftovers", ["S4","H1","H10","H11"]],
+    ["One rounded total, then split", ["S2","S3","S4","H1","H2","H3","H10","H11"]]]],
+  ["Worked out by the agent", "rec", [
+    ["The payer absorbs them", ["H1"]],
+    ["Currency decimals (¥, BD)", ["H2","H3"]],
+    ["Coupons split by order size", ["H5"]],
+    ["A coupon for one person", ["H6"]],
+    ["No tip on service charge", ["H7"]],
+    ["No tax on service charge", ["H9"]],
+    ["No service charge if you ate nothing", ["H12"]]]],
+  ["Survived the clone", "moat", [
+    ["Tip before coupons", ["H4","H13"]],
+    ["Service charge split evenly", ["H8"]]]]
 ];
 const cls = c => (c[0] === "S" ? "pub" : "") + (failed.includes(c) ? " miss" : "");
-const status = k => k.some(c => c[0] === "S") ? ["Leaked","leak"]
-  : k.some(c => failed.includes(c)) ? ["Still mine","moat"] : ["Worked out","rec"];
-let html = "<tr><th></th>" + cols.map(c => `<td class="h ${cls(c)}">${c}</td>`).join("") + '<td class="st"></td></tr>';
-for (const [title, kills] of rows) {
-  const [label, s] = status(kills);
-  html += `<tr><th>${title}</th>` + cols.map(c => `<td class="${cls(c)}">${kills.includes(c) ? `<span class="dot ${s}"></span>` : ""}</td>`).join("")
-    + `<td class="st"><span class="chip ${s}">${label}</span></td></tr>`;
+let html = "<tr><th></th>" + cols.map(c => `<td class="h ${cls(c)}">${c}</td>`).join("") + "</tr>";
+for (const [name, s, rows] of groups) {
+  html += `<tr class="g ${s}"><th>${name}</th>` + cols.map(c => `<td class="${cls(c)}"></td>`).join("") + "</tr>";
+  for (const [title, kills] of rows) {
+    html += `<tr><th>${title}</th>` + cols.map(c => `<td class="${cls(c)}">${kills.includes(c) ? `<span class="dot ${s}"></span>` : ""}</td>`).join("") + "</tr>";
+  }
 }
 document.getElementById("m").innerHTML = html;
 </script>

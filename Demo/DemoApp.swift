@@ -117,7 +117,7 @@ struct RuleSections: View {
 
     static func heading(_ status: RuleStatus, count: Int) -> String {
         switch status {
-        case .moat: return "Still yours (\(count))"
+        case .moat: return "Survived the clone (\(count))"
         case .reconstructed: return "Worked out by the agent (\(count))"
         case .leaked: return "Leaked by screenshots (\(count))"
         case .untested: return "No case tests it (\(count))"

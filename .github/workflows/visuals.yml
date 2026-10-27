@@ -35,9 +35,9 @@ jobs:
             convert "/tmp/$1.png" -crop "$2x$3+0+0" +repage "docs/$1.png"
           }
           render header 1600 840
-          render diagram 1600 940
+          render diagram 1040 960
           render code 1200 628
-          render simulator 1600 1000
+          render simulator 1040 720
           ls -la docs
       - name: Commit visuals if they changed
         run: |

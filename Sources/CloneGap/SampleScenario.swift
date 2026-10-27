@@ -44,7 +44,8 @@ public enum SampleScenario {
             expected: ["Ana": money(15_64), "Ben": money(15_62), "Cy": money(15_62), "Dee": money(15_62)])
     ]
 
-    /// The team's hidden eval set. None of these numbers has been posted.
+    /// The team's hidden eval set: cases Tab itself never posted. They are
+    /// public here only because Tab is fictional.
     public static let hidden: [EvalCase] = [
         EvalCase(
             id: "H1", title: "The payer is listed last", visibility: .hidden,

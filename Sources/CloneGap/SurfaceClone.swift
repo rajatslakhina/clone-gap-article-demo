@@ -1,10 +1,13 @@
 // SurfaceClone.swift
 //
 // Written by a fresh Claude agent on 27 Oct 2026, as a red-team exercise.
-// It was given only Tab's public material: the App Store text, the four
-// screenshots in SampleScenario.published and the types in Bill.swift.
+// It was given only Tab's public material: the App Store text, the numbers
+// from the four screenshots in SampleScenario.published and the types in
+// Bill.swift.
 // It was told not to read files or run tools. Everything below this header
-// is its reply, unchanged.
+// is the code from its reply, unchanged. The brief it was given is in
+// docs/red-team-brief.md and the rest of its reply, including the
+// assumptions it listed, is in docs/agent-reply.md.
 
 import Foundation
 
